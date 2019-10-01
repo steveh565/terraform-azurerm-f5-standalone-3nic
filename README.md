@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Terraform module deploys a 3 NIC standalone F5 Application Delivery Controller for Load Balancing, Web Application Firewalling and secure remote access.
+This Terraform module deploys a 3 NIC standalone F5 Application Delivery Controller.
 
 ## Security Controls
 
@@ -25,9 +25,8 @@ module "f5adc" {
   name                         = "someName"
   resourcegroup_name           = "someRGName"
   vm_size                      = "Standard_DS3_v2"
-  admin_username               = "fwadmin"
+  admin_username               = "F5admin"
   secretPasswordName           = "someSecretPasswordName"
-  custom_data                  = "fwconfig/fwconfig-lic.conf"
   vnet_name                    = "someVnetName"
   vnet_resourcegroup_name      = "someVnetName"
   subnet1_name                 = "someName"
@@ -38,6 +37,7 @@ module "f5adc" {
   nic1_public_ip               = false
   nic2_private_ip_address      = ["10.10.10.69", "10.10.10.70"]
   nic3_private_ip_address      = ["10.10.10.134", "10.10.10.135"]
+  nic4_private_ip_address      = ["10.10.10.197"]
   keyvault = {
     name                 = "somekeyvault.name"
     resource_group_name  = "someKVRGName"
@@ -50,11 +50,11 @@ module "f5adc" {
 
 | Name                    | Type   | Required | Value                                                                                                                                 |
 | ----------------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| name                    | string | yes      | Name for the firewall resource                                                                                                        |
-| resource_group_name     | string | yes      | Name of the resourcegroup that will contain the Firewall resources                                                                    |
+| name                    | string | yes      | Name for the F5 resource                                                                                                        |
+| resource_group_name     | string | yes      | Name of the resourcegroup that will contain the F5 resources                                                                    |
 | admin_username          | string | yes      | Name of the VM admin account                                                                                                          |
 | secretPasswordName      | string | yes      | Name of the Keyvault secret containing the VM admin account password                                                                  |
-| custom_data             | string | yes      | some base firewall config code to apply. Eg: "fwconfig/fwconfig-lic.conf"                                                             |
+| custom_data             | string | yes      | some base F5 config code to apply. Eg: "F5config/F5config-lic.conf"                                                             |
 | vnetName                | string | yes      | Name of the VNET the subnet is part of                                                                                                |
 | vnet_resourcegroup_name | string | yes      | Name of the resourcegroup containing the VNET                                                                                         |
 | subnet1Name             | string | yes      | Name of the subnet where NIC1 will connect to                                                                                         |
@@ -68,10 +68,10 @@ module "f5adc" {
 | storage_image_reference | object | no       | Specify the storage image used to create the VM. Default is 2016-Datacenter. - [storage image](#storage-image-reference-object)       |
 | plan                    | object | no       | Specify the plan used to create the VM. - [plan](#plan-object)                                                                        |
 | custom_data             | string | no       | some custom ps1 code to execute. Eg: ${file("serverconfig/jumpbox-init.ps1")}                                                         |
-| nic1_public_ip          | bool   | no       | Does the Firewall require public IP(s). true or false. Default: true                                                                  |
+| nic1_public_ip          | bool   | no       | Does the F5 require public IP(s). true or false. Default: true                                                                  |
 | location                | string | no       | Azure location for resources. Default: canadacentral                                                                                  |
-| vm_size                 | string | no       | Specifies the desired size of the Virtual Machine. Default: Standard_F4                                                               |
-| vm_depends_on           | list   | no       | List of [terraform dependancies](#dependancies-list) that need to be deployed before the firewall deployment can start. Default: null |
+| vm_size                 | string | no       | Specifies the desired size of the Virtual Machine. Default: Standard_DS3_v2                                                               |
+| vm_depends_on           | list   | no       | List of [terraform dependancies](#dependancies-list) that need to be deployed before the F5 deployment can start. Default: null |
 
 ### tag object
 
