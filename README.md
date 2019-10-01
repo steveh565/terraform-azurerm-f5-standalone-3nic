@@ -1,8 +1,8 @@
-# Terraform 4 NIC Standalone Fortigate Firewall
+# Terraform 3 NIC Standalone F5 Application Delivery Controller
 
 ## Introduction
 
-This Terraform module deploys a 3 NIC standalone F5 Application Delivery Controller.
+This Terraform module deploys a 3 NIC standalone F5 Application Delivery Controller for Load Balancing, Web Application Firewalling and secure remote access.
 
 ## Security Controls
 
@@ -38,7 +38,6 @@ module "f5adc" {
   nic1_public_ip               = false
   nic2_private_ip_address      = ["10.10.10.69", "10.10.10.70"]
   nic3_private_ip_address      = ["10.10.10.134", "10.10.10.135"]
-  nic4_private_ip_address      = ["10.10.10.197"]
   keyvault = {
     name                 = "somekeyvault.name"
     resource_group_name  = "someKVRGName"
@@ -61,13 +60,11 @@ module "f5adc" {
 | subnet1Name             | string | yes      | Name of the subnet where NIC1 will connect to                                                                                         |
 | subnet2Name             | string | yes      | Name of the subnet where NIC2 will connect to                                                                                         |
 | subnet3Name             | string | yes      | Name of the subnet where NIC3 will connect to                                                                                         |
-| subnet4Name             | string | yes      | Name of the subnet where NIC4 will connect to                                                                                         |
 | keyvault                | object | yes      | Object containing keyvault resource configuration. - [keyvault](#keyvault-object)                                                     |
 | tags                    | object | yes      | Object containing a tag values - [tags pairs](#tag-object)                                                                            |
 | nic1_private_ip_address | list   | yes      | List of private IP for the NIC1 - Eg: for two IP: ["10.10.10.10", "10.10.10.11"]                                                      |
 | nic2_private_ip_address | list   | yes      | List of private IP for the NIC2 - Eg: for one IP: ["10.10.20.10"]                                                                     |
 | nic3_private_ip_address | list   | yes      | List of private IP for the NIC3 - Eg: for one IP: ["10.10.30.10"]                                                                     |
-| nic4_private_ip_address | list   | yes      | List of private IP for the NIC4 - Eg: for one IP: ["10.10.40.10"]                                                                     |
 | storage_image_reference | object | no       | Specify the storage image used to create the VM. Default is 2016-Datacenter. - [storage image](#storage-image-reference-object)       |
 | plan                    | object | no       | Specify the plan used to create the VM. - [plan](#plan-object)                                                                        |
 | custom_data             | string | no       | some custom ps1 code to execute. Eg: ${file("serverconfig/jumpbox-init.ps1")}                                                         |
@@ -156,7 +153,7 @@ keyvault = {
 Example variable:
 
 ```hcl
-vm_depends_on = ["${module.FWCore01.firewall}", "${module.FWMGMT01.firewall}", "${azurerm_public_ip.pip}"]
+vm_depends_on = ["${module.F5ADC01.f5adc}", "${module.F5MGMT01.f5adc}", "${azurerm_public_ip.pip}"]
 ```
 
 ## History
