@@ -32,12 +32,10 @@ module "f5adc" {
   subnet1_name                 = "someName"
   subnet2_name                 = "someName"
   subnet3_name                 = "someName"
-  subnet4_name                 = "someName"
   nic1_private_ip_address      = ["10.10.10.6", "10.10.10.7"]
   nic1_public_ip               = false
   nic2_private_ip_address      = ["10.10.10.69", "10.10.10.70"]
   nic3_private_ip_address      = ["10.10.10.134", "10.10.10.135"]
-  nic4_private_ip_address      = ["10.10.10.197"]
   keyvault = {
     name                 = "somekeyvault.name"
     resource_group_name  = "someKVRGName"
