@@ -117,8 +117,7 @@ resource azurerm_virtual_machine F5 {
   os_profile {
     computer_name  = "${var.name}"
     admin_username = "${var.admin_username}"
-    //admin_password = "${data.azurerm_key_vault_secret.FWpasswordsecret.value}"
-    admin_password = "Canada123!"
+    admin_password = "${var.admin_password}"
     //custom_data    = "${file("${var.custom_data}")}"
   }
   storage_image_reference {

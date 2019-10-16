@@ -13,7 +13,8 @@ variable "tags" {
 
 variable "name" {}
 variable "admin_username" {}
-variable "secretPasswordName" {}
+//variable "secretPasswordName" {}
+variable "admin_password" {}
 variable "vnet_name" {}
 variable "resourcegroup_name" {}
 variable "vnet_resourcegroup_name" {}
