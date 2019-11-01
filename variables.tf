@@ -25,6 +25,7 @@ variable "nic1_private_ip_address" {}
 variable "nic1_public_ip" { default = true }
 variable "nic2_private_ip_address" {}
 variable "nic3_private_ip_address" {}
+variable "nic4_private_ip_address" {}
 variable "vm_size" {
   default = "Standard_DS3_v2"
 }
