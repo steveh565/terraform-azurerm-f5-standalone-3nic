@@ -26,7 +26,7 @@ module "f5adc" {
   resourcegroup_name           = "someRGName"
   vm_size                      = "Standard_DS3_v2"
   admin_username               = "F5admin"
-  secretPasswordName           = "someSecretPasswordName"
+  admin_password               = "MySecurePassword!"
   vnet_name                    = "someVnetName"
   vnet_resourcegroup_name      = "someVnetName"
   subnet1_name                 = "someName"

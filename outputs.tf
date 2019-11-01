@@ -1,4 +1,4 @@
-output "firewall" {
+output "F5-ADC" {
   value = "${azurerm_virtual_machine.F5}"
 }
 
